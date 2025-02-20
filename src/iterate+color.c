@@ -58,7 +58,7 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int	create_psychedelic_color(int iterations, int max_iter, int color_shift)
+/* int	create_psychedelic_color(int iterations, int max_iter, int color_shift)
 {
 	double	t;
 	int		r;
@@ -76,4 +76,46 @@ int	create_psychedelic_color(int iterations, int max_iter, int color_shift)
 	g = (g + 127) * t;
 	b = (b + 127) * t;
 	return (create_trgb(0, r, g, b));
+} */
+
+int	create_psychedelic_color(int iterations, int max_iter, int color_shift)
+{
+	double	t;
+	int		r;
+	int		g;
+	int		b;
+
+	if (iterations == max_iter)
+		return (0xFFFFFF);
+	t = (double)iterations / max_iter;
+	t = t * t;
+	r = (int)(sin(t * 6.28318 + color_shift * 1.3) * 127 + 128);
+    g = (int)(sin(t * 6.28318 + color_shift * 2.1) * 127 + 128);
+    b = (int)(sin(t * 6.28318 + color_shift * 3.7) * 127 + 128);
+	r = (r + 127) * t;
+	g = (g + 127) * t;
+	b = (b + 127) * t;
+	return (create_trgb(0, r, g, b));
 }
+
+/* 
+int create_psychedelic_color(int iterations, int max_iter, int color_shift)
+{
+    double t = (double)iterations / max_iter;
+    int r, g, b;
+
+    // Versione 1: Cambio colore di sfondo
+    if (color_shift % 2 == 0)
+    {
+        r = (int)(9 * (1 - t) * t * t * t * 255);
+        g = (int)(15 * (1 - t) * (1 - t) * t * t * 255);
+        b = (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255);
+    }
+    else // Versione 2: Cambio colore più netto
+    {
+        r = (int)(sin(t * 6.28318 + color_shift * 1.3) * 127 + 128);
+        g = (int)(sin(t * 6.28318 + color_shift * 2.1) * 127 + 128);
+        b = (int)(sin(t * 6.28318 + color_shift * 3.7) * 127 + 128);
+    }
+    return create_trgb(0, r, g, b);
+} */

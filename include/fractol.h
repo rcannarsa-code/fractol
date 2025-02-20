@@ -20,8 +20,8 @@
 
 # define WIDTH 800
 # define HEIGHT 600
-# define MAX_ITER_BASE 500
-# define MAX_ITER 500 //fractal->max_iter
+# define MAX_ITER_BASE 300
+# define MAX_ITER 300 //fractal->max_iter
 
 # define MANDELBROT 1
 # define JULIA 2
