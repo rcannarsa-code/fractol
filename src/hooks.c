@@ -6,7 +6,7 @@
 /*   By: rcannars <rcannars@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:16:00 by rcannars          #+#    #+#             */
-/*   Updated: 2025/02/19 15:45:28 by rcannars         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:56:33 by rcannars         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	move_view(int keycode, t_fractal *fractal)
 
 	move_step = 0.3 * fractal->zoom;
 	if (keycode == KEY_LEFT)
-		fractal->move_x += move_step;
-	else if (keycode == KEY_RIGHT)
 		fractal->move_x -= move_step;
+	else if (keycode == KEY_RIGHT)
+		fractal->move_x += move_step;
 	else if (keycode == KEY_UP)
-		fractal->move_y += move_step;
-	else if (keycode == KEY_DOWN)
 		fractal->move_y -= move_step;
+	else if (keycode == KEY_DOWN)
+		fractal->move_y += move_step;
 }
 
 void	shift_colors(t_fractal *fractal)

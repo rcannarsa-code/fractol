@@ -8,7 +8,7 @@ LIBFTDIR = libft
 MLXDIR = minilibx-linux
 
 # Source files
-SRC = main.c init.c hooks.c draw.c complex.c handle.c iterate+color.c
+SRC = main.c init.c hooks.c draw.c complex.c handle.c iterate.c color.c
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 

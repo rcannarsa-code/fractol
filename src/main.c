@@ -6,7 +6,7 @@
 /*   By: rcannars <rcannars@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:16:06 by rcannars          #+#    #+#             */
-/*   Updated: 2025/02/19 14:49:49 by rcannars         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:57:34 by rcannars         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	check_fractal_type(char *type, t_fractal *fractal)
 		set_julia_params(fractal);
 	else if (ft_strncmp(type, "celtic", 6) == 0)
 		fractal->fractal_type = 3;
+	else if (ft_strncmp(type, "burning_ship", 11) == 0)
+		fractal->fractal_type = 4;
 	else
 		return (1);
 	return (0);
@@ -47,7 +49,8 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 	{
-		ft_printf("Usage: %s [mandelbrot/julia/celtic]\n", argv[0]);
+		ft_printf("Usage: %s [mandelbrot/julia/celtic/burning_ship]\n",
+			argv[0]);
 		return (1);
 	}
 	if (init_data(&fractal) == 1)
