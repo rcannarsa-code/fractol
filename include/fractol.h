@@ -6,7 +6,7 @@
 /*   By: rcannars <rcannars@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:15:44 by rcannars          #+#    #+#             */
-/*   Updated: 2025/02/23 13:56:14 by rcannars         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:41:27 by rcannars         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,8 @@ double			complex_abs(t_complex c);
 void			move_view(int keycode, t_fractal *fractal);
 void			shift_colors(t_fractal *fractal);
 void			draw_fractal(t_fractal *fractal);
+double			ft_atof(const char *str);
+void			parse_julia_params(t_fractal *fractal, int argc, char **argv);
+void			set_julia_params(t_fractal *fractal);
 
 #endif

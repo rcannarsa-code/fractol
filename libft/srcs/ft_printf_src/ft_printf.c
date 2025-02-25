@@ -6,7 +6,7 @@
 /*   By: rcannars <rcannars@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 15:02:51 by rcannars          #+#    #+#             */
-/*   Updated: 2025/02/23 13:59:13 by rcannars         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:50:23 by rcannars         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	ft_printf(const char *format, ...)
 	int		length_print;
 	int		i;
 	int		chars_written;
-	int		chars_written;
 
 	length_print = 0;
 	i = 0;
@@ -62,6 +61,8 @@ int	ft_printf(const char *format, ...)
 } */
 static int	handle_format(va_list args, char specifier)
 {
+	int	chars_written;
+
 	chars_written = 0;
 	if (specifier == 'c')
 		chars_written += ft_putchar(va_arg(args, int));

@@ -16,6 +16,16 @@
 # include <stdarg.h>
 # include <unistd.h>
 
+int	ft_printf(const char *format, ...);
+int	ft_putchar(char c);
+int	ft_putstr(char *s);
+int	ft_putnbr(int n);
+int	ft_print_unsigned(unsigned int n);
+int	ft_print_hex(unsigned int num, int uppercase);
+int	ft_print_ptr(unsigned long ptr);
+
+#endif
+
 /* typedef struct s_flags
 {
     int minus;     // Flag '-' per allineare a sinistra
@@ -28,13 +38,3 @@
     int dot;       // Flag per indicare se c'è un punto
 } t_flags;
  */
-
-int	ft_printf(const char *format, ...);
-int	ft_putchar(char c);
-int	ft_putstr(char *s);
-int	ft_putnbr(int n);
-int	ft_print_unsigned(unsigned int n);
-int	ft_print_hex(unsigned int num, int uppercase);
-int	ft_print_ptr(unsigned long ptr);
-
-#endif

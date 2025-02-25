@@ -61,3 +61,33 @@ int	handle_mouse(int button, int x, int y, t_fractal *fractal)
 	draw_fractal(fractal);
 	return (0);
 }
+
+double ft_atof(const char *str)
+{
+    double result;
+    double decimal;
+    double sign;
+    int i;
+    
+    result = 0.0;
+    decimal = 0.0;
+    sign = 1.0;
+    i = 0;
+    if (str[i] == '-' && ++i)
+        sign = -1.0;
+    while (str[i] >= '0' && str[i] <= '9')
+        result = result * 10.0 + (str[i++] - '0');
+    if (str[i] == '.')
+    {
+        double power;
+        
+        power = 0.1;
+        i++;
+        while (str[i] >= '0' && str[i] <= '9')
+        {
+            decimal += (str[i++] - '0') * power;
+            power *= 0.1;
+        }
+    }
+    return (sign * (result + decimal));
+}

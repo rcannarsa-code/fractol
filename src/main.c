@@ -6,7 +6,7 @@
 /*   By: rcannars <rcannars@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:16:06 by rcannars          #+#    #+#             */
-/*   Updated: 2025/02/23 13:57:34 by rcannars         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:40:59 by rcannars         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,49 +21,64 @@ static void	print_instructions(void)
 	ft_printf("ESC or X: Exit\n\n");
 }
 
-static void	set_julia_params(t_fractal *fractal)
+static int check_exact_match(char *str1, char *str2)
 {
-	fractal->fractal_type = 2;
-	fractal->julia_c.real = -0.7;
-	fractal->julia_c.imag = 0.27015;
+    int i;
+
+    i = 0;
+    while (str1[i] && str2[i] && str1[i] == str2[i])
+        i++;
+    return (str1[i] == str2[i]);
 }
 
-static int	check_fractal_type(char *type, t_fractal *fractal)
+static int check_fractal_type(char *type, t_fractal *fractal, int argc, char **argv)
 {
-	if (ft_strncmp(type, "mandelbrot", 10) == 0)
-		fractal->fractal_type = 1;
-	else if (ft_strncmp(type, "julia", 5) == 0)
-		set_julia_params(fractal);
-	else if (ft_strncmp(type, "celtic", 6) == 0)
-		fractal->fractal_type = 3;
-	else if (ft_strncmp(type, "burning_ship", 11) == 0)
-		fractal->fractal_type = 4;
-	else
-		return (1);
-	return (0);
+    if (check_exact_match(type, "mandelbrot"))
+        fractal->fractal_type = MANDELBROT;
+    else if (check_exact_match(type, "julia"))
+    {
+        set_julia_params(fractal);
+        parse_julia_params(fractal, argc, argv);
+    }
+    else if (check_exact_match(type, "celtic"))
+        fractal->fractal_type = CELTIC;
+    else if (check_exact_match(type, "burning_ship"))
+        fractal->fractal_type = BURNING_SHIP;
+    else
+        return (1);
+    return (0);
 }
 
-int	main(int argc, char **argv)
+static void print_usage(char *program_name)
 {
-	t_fractal	fractal;
+    ft_printf("Usage: %s [fractal_type] [parameters]\n\n", program_name);
+    ft_printf("Fractal types:\n");
+    ft_printf("  mandelbrot\n");
+    ft_printf("  julia [real] [imaginary]\n");
+    ft_printf("  celtic\n");
+    ft_printf("  burning_ship\n");
+}
 
-	if (argc < 2)
-	{
-		ft_printf("Usage: %s [mandelbrot/julia/celtic/burning_ship]\n",
-			argv[0]);
-		return (1);
-	}
-	if (init_data(&fractal) == 1)
-		return (1);
-	if (check_fractal_type(argv[1], &fractal))
-	{
-		cleanup_data(&fractal);
-		ft_printf("Invalid fractal type\n");
-		return (1);
-	}
-	print_instructions();
-	draw_fractal(&fractal);
-	setup_hooks(&fractal);
-	mlx_loop(fractal.mlx);
-	return (0);
+int main(int argc, char **argv)
+{
+    t_fractal fractal;
+    
+    if (argc < 2)
+    {
+        print_usage(argv[0]);
+        return (1);
+    }
+    if (init_data(&fractal) == 1)
+        return (1);
+    if (check_fractal_type(argv[1], &fractal, argc, argv))
+    {
+        cleanup_data(&fractal);
+        ft_printf("Invalid fractal type\n");
+        return (1);
+    }
+    print_instructions();
+    draw_fractal(&fractal);
+    setup_hooks(&fractal);
+    mlx_loop(fractal.mlx);
+    return (0);
 }
